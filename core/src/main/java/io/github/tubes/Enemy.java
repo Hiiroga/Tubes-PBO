@@ -1,18 +1,12 @@
 package io.github.tubes;
 
 public class Enemy extends Entity {
-
-    private final int expDrop;
     private final int goldDrop;
 
-    public Enemy(String name, int maxHp, int minDamage, int maxDamage, int accuracy, int level) {
-        super(name, maxHp, minDamage, maxDamage, accuracy, level);
-
-        this.expDrop = level * 5;
-        this.goldDrop = level * 10;
+    public Enemy(String name, int maxHp, int minDamage, int maxDamage, int defense, int stageLevel) {
+        super(name, maxHp, minDamage, maxDamage, defense);
+        this.goldDrop = stageLevel * 30;
     }
 
-    // --- Getters untuk Drop ---
-    public int getExpDrop() { return expDrop; }
     public int getGoldDrop() { return goldDrop; }
 }

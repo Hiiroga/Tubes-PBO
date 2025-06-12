@@ -1,4 +1,4 @@
-package io.github.tubes; // Ganti package sesuai proyek Anda
+package io.github.tubes;
 
 public abstract class Entity {
     protected String name;
@@ -6,24 +6,20 @@ public abstract class Entity {
     protected int maxHp;
     protected int minDamage;
     protected int maxDamage;
-    protected int accuracy;
-    protected int level;
+    protected int defense;
     protected boolean dead = false;
 
-    public Entity(String name, int maxHp, int minDamage, int maxDamage, int accuracy, int level) {
+    public Entity() {}
+
+    public Entity(String name, int maxHp, int minDamage, int maxDamage, int defense) {
         this.name = name;
         this.maxHp = maxHp;
         this.hp = maxHp;
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
-        this.accuracy = accuracy;
-        this.level = level;
+        this.defense = defense;
     }
 
-    /**
-     * Mengurangi HP entitas sebesar jumlah kerusakan.
-     * @param damageAmount Jumlah kerusakan yang diterima.
-     */
     public void takeDamage(int damageAmount) {
         this.hp -= damageAmount;
         if (this.hp <= 0) {
@@ -36,34 +32,11 @@ public abstract class Entity {
         return dead;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-        if (this.hp > this.maxHp) {
-            this.hp = this.maxHp;
-        }
-    }
-
-    public int getMaxHp() {
-        return maxHp;
-    }
-
-    public int getMinDamage() {
-        return minDamage;
-    }
-
-    public int getMaxDamage() {
-        return maxDamage;
-    }
-
-    public int getLevel() {
-        return level;
-    }
+    public String getName() { return name; }
+    public int getHp() { return hp; }
+    public void setHp(int hp) { this.hp = hp; if (this.hp > this.maxHp) { this.hp = this.maxHp; } }
+    public int getMaxHp() { return maxHp; }
+    public int getMinDamage() { return minDamage; }
+    public int getMaxDamage() { return maxDamage; }
+    public int getDefense() { return defense; }
 }

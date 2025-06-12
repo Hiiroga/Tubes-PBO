@@ -13,14 +13,25 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import java.util.ArrayList;
 
 public class LoseScreen implements Screen {
     private final Stage stage;
+    private final Main game;
 
     public LoseScreen(final Main game) {
+        this.game = game;
         stage = new Stage(new FitViewport(Main.VIRTUAL_WIDTH, Main.VIRTUAL_HEIGHT));
         Gdx.input.setInputProcessor(stage);
         Skin skin = new Skin(Gdx.files.internal("uiskin.json"));
+
+        ArrayList<Player> party = GameData.getParty();
+        for (Player hero : party) {
+            hero.setHp(hero.getMaxHp());
+            hero.dead = false;
+            hero.clearBuffs();
+        }
+        GameData.save();
 
         Image bgImage = new Image(new Texture("bghome.png"));
         bgImage.setFillParent(true);
@@ -31,13 +42,13 @@ public class LoseScreen implements Screen {
         table.center();
         stage.addActor(table);
 
-        Label loseLabel = new Label("KAMU KALAH", skin);
+        Label loseLabel = new Label("DEFEAT", skin);
         loseLabel.setFontScale(3.0f);
 
-        Label infoLabel = new Label("Coba lagi lain kali!", skin);
+        Label infoLabel = new Label("Try again next time!", skin);
         infoLabel.setFontScale(1.5f);
 
-        TextButton backButton = new TextButton("KEMBALI KE MENU", skin);
+        TextButton backButton = new TextButton("BACK TO MENU", skin);
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -52,8 +63,12 @@ public class LoseScreen implements Screen {
         table.add(backButton).width(300).height(60);
     }
 
-    @Override public void show() {}
-    @Override public void render(float delta) { Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f)); stage.draw(); }
+    @Override
+    public void show() {
+        game.playLobbyMusic();
+    }
+
+    @Override public void render(float delta) { Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); stage.act(delta); stage.draw(); }
     @Override public void resize(int width, int height) { stage.getViewport().update(width, height, true); }
     @Override public void pause() {}
     @Override public void resume() {}

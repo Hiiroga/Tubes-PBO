@@ -32,18 +32,35 @@ public class StageChoice implements Screen {
 
         Table rootTable = new Table();
         rootTable.setFillParent(true);
+        rootTable.pad(15);
         stage.addActor(rootTable);
 
-        Label title = new Label("PILIH BABAK", skin);
+        // DIUBAH: Info Gold sekarang sendirian di atas
+        Table topBar = new Table();
+        Label goldLabel = new Label("Gold: " + GameData.getGold(), skin);
+        topBar.add(goldLabel).left().expandX();
+
+        Label title = new Label("SELECT STAGE", skin);
         title.setFontScale(2.5f);
 
-        TextButton backButton = new TextButton("KEMBALI", skin);
+        Table bottomButtons = new Table();
+        TextButton backButton = new TextButton("BACK", skin);
         backButton.addListener(new ClickListener() {
             @Override public void clicked(InputEvent event, float x, float y) { game.setScreen(new MainMenuScreen(game)); }
         });
 
-        rootTable.add(title).expandX().top().padTop(50);
-        rootTable.row();
+        TextButton storeButton = new TextButton("STORE", skin);
+        storeButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new StoreScreen(game));
+            }
+        });
+
+        bottomButtons.add(backButton).width(160).height(50).left();
+        bottomButtons.add().expandX(); // Spacer
+        bottomButtons.add(storeButton).width(160).height(50).right();
+        // ----------------------------------------------------
 
         Table stageTable = new Table();
         int maxLevelUnlocked = GameData.getMaxLevelUnlocked();
@@ -56,19 +73,28 @@ public class StageChoice implements Screen {
                     @Override public void clicked(InputEvent event, float x, float y) { game.setScreen(new GameScreen(game, currentStage)); }
                 });
             } else {
-                stageButton = new TextButton("[ TERKUNCI ]", skin);
+                stageButton = new TextButton("[ LOCKED ]", skin);
                 stageButton.setDisabled(true);
             }
             stageTable.add(stageButton).width(250).height(50).pad(5);
             stageTable.row();
         }
 
+        // Susun ulang tata letak utama
+        rootTable.add(topBar).expandX().fillX().top();
+        rootTable.row();
+        rootTable.add(title).padTop(20).padBottom(20);
+        rootTable.row();
         rootTable.add(stageTable).expand();
         rootTable.row();
-        rootTable.add(backButton).width(160).height(50).bottom().left().pad(20);
+        rootTable.add(bottomButtons).expandX().fillX().bottom();
     }
 
-    @Override public void show() {}
+    @Override
+    public void show() {
+        game.playLobbyMusic();
+    }
+
     @Override public void render(float delta) { Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); stage.act(delta); stage.draw(); }
     @Override public void resize(int width, int height) { stage.getViewport().update(width, height, true); }
     @Override public void pause() {}

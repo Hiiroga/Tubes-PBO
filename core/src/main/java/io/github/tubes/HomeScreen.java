@@ -36,7 +36,7 @@ public class HomeScreen implements Screen {
         Label titleLabel = new Label("Heroes Rising", skin);
         titleLabel.setFontScale(3.5f);
 
-        TextButton startButton = new TextButton("KETUK UNTUK MULAI", skin);
+        TextButton startButton = new TextButton("TAP TO START", skin);
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -49,7 +49,11 @@ public class HomeScreen implements Screen {
         rootTable.add(startButton).width(300).height(60).expand().bottom().padBottom(100);
     }
 
-    @Override public void show() {}
+    @Override
+    public void show() {
+        game.playLobbyMusic();
+    }
+
     @Override public void render(float delta) { Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); stage.act(delta); stage.draw(); }
     @Override public void resize(int width, int height) { stage.getViewport().update(width, height, true); }
     @Override public void pause() {}

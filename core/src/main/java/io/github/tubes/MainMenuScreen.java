@@ -36,27 +36,30 @@ public class MainMenuScreen implements Screen {
         Label titleLabel = new Label("Heroes Rising", skin);
         titleLabel.setFontScale(3.5f);
 
-        TextButton playButton = new TextButton("PERMAINAN", skin);
-        playButton.addListener(new ClickListener() { @Override public void clicked(InputEvent e, float x, float y) { game.setScreen(new StageChoice(game)); }});
+        TextButton playButton = new TextButton("PLAY", skin);
+        playButton.addListener(new ClickListener() {
+            @Override public void clicked(InputEvent e, float x, float y) { game.setScreen(new StageChoice(game)); }
+        });
 
-        TextButton settingsButton = new TextButton("PENGATURAN", skin);
-        settingsButton.addListener(new ClickListener() { @Override public void clicked(InputEvent e, float x, float y) { game.setScreen(new SettingsScreen(game)); }});
-
-        TextButton exitButton = new TextButton("KELUAR", skin);
-        exitButton.addListener(new ClickListener() { @Override public void clicked(InputEvent e, float x, float y) { Gdx.app.exit(); }});
+        TextButton exitButton = new TextButton("EXIT", skin);
+        exitButton.addListener(new ClickListener() {
+            @Override public void clicked(InputEvent e, float x, float y) { Gdx.app.exit(); }
+        });
 
         rootTable.add(titleLabel).padTop(50).padBottom(50);
         rootTable.row();
         rootTable.add(playButton).width(250).height(60).pad(10);
-        rootTable.row();
-        rootTable.add(settingsButton).width(250).height(60).pad(10);
         rootTable.row();
         rootTable.add(exitButton).width(250).height(60).pad(10);
 
         rootTable.center();
     }
 
-    @Override public void show() {}
+    @Override
+    public void show() {
+        game.playLobbyMusic();
+    }
+
     @Override public void render(float delta) { Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); stage.act(delta); stage.draw(); }
     @Override public void resize(int width, int height) { stage.getViewport().update(width, height, true); }
     @Override public void pause() {}

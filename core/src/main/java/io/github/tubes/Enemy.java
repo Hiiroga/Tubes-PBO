@@ -8,7 +8,6 @@ public class Enemy extends Entity {
     public Enemy(String name, int maxHp, int minDamage, int maxDamage, int accuracy, int level) {
         super(name, maxHp, minDamage, maxDamage, accuracy, level);
 
-        // Tentukan drop EXP dan Gold berdasarkan level musuh
         this.expDrop = level * 5;
         this.goldDrop = level * 10;
     }

@@ -17,8 +17,8 @@ public class Main extends Game {
 
         for (Texture texture : atlas.getTextures()) {
             texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-        }
-        GameData.load();
+        }GameData.load();
+
         this.setScreen(new HomeScreen(this));
     }
 

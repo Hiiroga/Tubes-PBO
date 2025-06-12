@@ -32,15 +32,10 @@ public abstract class Entity {
         }
     }
 
-    /**
-     * Memeriksa apakah entitas sudah mati.
-     * @return true jika HP <= 0.
-     */
     public boolean isDead() {
         return dead;
     }
 
-    // --- Getters and Setters ---
     public String getName() {
         return name;
     }

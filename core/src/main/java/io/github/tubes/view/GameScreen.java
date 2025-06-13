@@ -85,7 +85,7 @@ public class GameScreen implements Screen {
         resumeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.pressSound.play();
+                game.pressSound.play(0.04f);
                 isPaused = false;
                 pauseDialog.hide();
             }
@@ -94,7 +94,7 @@ public class GameScreen implements Screen {
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.backSound.play();
+                game.backSound.play(0.03f);
                 game.setScreen(new MainMenuScreen(game));
             }
         });
@@ -133,7 +133,7 @@ public class GameScreen implements Screen {
         closeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.pressSound.play();
+                game.pressSound.play(0.04f);
                 inventoryDialog.hide();
                 showActionButtons(true);
             }
@@ -164,7 +164,7 @@ public class GameScreen implements Screen {
                     if (canBeHealed) {
                         final Item potion = GameData.getItem("Potion");
                         if (GameData.getInventory().useItem(potion.name)) {
-                            game.potionEffectSound.play();
+                            game.potionEffectSound.play(0.03f);
                             if (targetHero.isDead()) {
                                 targetHero.dead = false;
                                 targetHero.setHp(potion.healAmount);
@@ -190,7 +190,7 @@ public class GameScreen implements Screen {
         cancelButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.backSound.play();
+                game.backSound.play(0.03f);
                 targetSelectionDialog.hide();
                 showActionButtons(true);
             }
@@ -234,7 +234,7 @@ public class GameScreen implements Screen {
         pauseButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.pressSound.play();
+                game.pressSound.play(0.04f);
                 isPaused = true;
                 pauseDialog.show(stage);
             }
@@ -359,13 +359,13 @@ public class GameScreen implements Screen {
                 @Override
                 public void run() {
                     if (isAttacking) {
-                        game.punchSound.play();
+                        game.punchSound.play(0.02f);
                         int playerDamage = MathUtils.random(activeHero.getMinDamage(), activeHero.getMaxDamage());
                         int finalDamage = Math.max(0, playerDamage - enemy.getDefense());
                         enemy.takeDamage(finalDamage);
                         messageLabel.setText(activeHero.getName() + " attacks, dealing " + finalDamage + " damage!");
                     } else {
-                        game.defendSound.play();
+                        game.defendSound.play(0.05f);
                         isDefending = true;
                         messageLabel.setText(activeHero.getName() + " is defending!");
                     }
@@ -422,7 +422,7 @@ public class GameScreen implements Screen {
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
-                    game.punchSound.play();
+                    game.punchSound.play(0.02f);
                     int enemyAttackPower = MathUtils.random(enemy.getMinDamage(), enemy.getMaxDamage());
                     int targetDefense = target.getDefense();
                     if (isDefending) {

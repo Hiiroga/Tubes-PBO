@@ -57,7 +57,7 @@ public class WinScreen implements Screen {
         continueButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.pressSound.play();
+                game.pressSound.play(0.04f);
                 game.setScreen(new StageChoice(game));
             }
         });

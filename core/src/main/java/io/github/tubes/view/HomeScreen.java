@@ -41,7 +41,7 @@ public class HomeScreen implements Screen {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.pressSound.play();
+                game.pressSound.play(0.04f);
                 game.setScreen(new MainMenuScreen(game));
             }
         });

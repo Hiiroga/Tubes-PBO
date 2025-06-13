@@ -1,4 +1,4 @@
-package io.github.tubes;
+package io.github.tubes.model;
 
 import com.badlogic.gdx.utils.ObjectMap;
 

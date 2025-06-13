@@ -1,4 +1,4 @@
-package io.github.tubes;
+package io.github.tubes.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -13,6 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import io.github.tubes.model.GameData;
+import io.github.tubes.controller.Main;
+import io.github.tubes.model.Player;
+
 import java.util.ArrayList;
 
 public class WinScreen implements Screen {
@@ -31,7 +35,6 @@ public class WinScreen implements Screen {
         for (Player hero : party) {
             hero.setHp(hero.getMaxHp());
             hero.dead = false;
-            hero.clearBuffs();
         }
         GameData.save();
 
@@ -54,6 +57,7 @@ public class WinScreen implements Screen {
         continueButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.pressSound.play();
                 game.setScreen(new StageChoice(game));
             }
         });

@@ -1,4 +1,4 @@
-package io.github.tubes;
+package io.github.tubes.model;
 
 public abstract class Entity {
     protected String name;
@@ -7,9 +7,8 @@ public abstract class Entity {
     protected int minDamage;
     protected int maxDamage;
     protected int defense;
-    protected boolean dead = false;
+    public boolean dead = false;
 
-    public Entity() {}
 
     public Entity(String name, int maxHp, int minDamage, int maxDamage, int defense) {
         this.name = name;

@@ -1,9 +1,10 @@
-package io.github.tubes;
+package io.github.tubes.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
+
 import java.util.ArrayList;
 
 public class GameData {

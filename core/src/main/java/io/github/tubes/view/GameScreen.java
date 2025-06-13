@@ -1,4 +1,4 @@
-package io.github.tubes;
+package io.github.tubes.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -16,8 +16,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import io.github.tubes.controller.Main;
+import io.github.tubes.model.*;
 
 import java.util.ArrayList;
+
 
 public class GameScreen implements Screen {
     private final Main game;
@@ -82,6 +85,7 @@ public class GameScreen implements Screen {
         resumeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.pressSound.play();
                 isPaused = false;
                 pauseDialog.hide();
             }
@@ -90,6 +94,7 @@ public class GameScreen implements Screen {
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.backSound.play();
                 game.setScreen(new MainMenuScreen(game));
             }
         });
@@ -128,6 +133,7 @@ public class GameScreen implements Screen {
         closeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.pressSound.play();
                 inventoryDialog.hide();
                 showActionButtons(true);
             }
@@ -158,10 +164,11 @@ public class GameScreen implements Screen {
                     if (canBeHealed) {
                         final Item potion = GameData.getItem("Potion");
                         if (GameData.getInventory().useItem(potion.name)) {
+                            game.potionEffectSound.play();
                             if (targetHero.isDead()) {
                                 targetHero.dead = false;
                                 targetHero.setHp(potion.healAmount);
-                                messageLabel.setText(party.get(currentPlayerIndex).getName() + " revived " + targetHero.getName() + "!");
+                                messageLabel.setText(party.get(currentPlayerIndex).getName() + " Revived " + targetHero.getName() + "!");
                             } else {
                                 targetHero.setHp(targetHero.getHp() + potion.healAmount);
                                 messageLabel.setText(party.get(currentPlayerIndex).getName() + " used Potion on " + targetHero.getName() + "!");
@@ -183,6 +190,7 @@ public class GameScreen implements Screen {
         cancelButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.backSound.play();
                 targetSelectionDialog.hide();
                 showActionButtons(true);
             }
@@ -226,6 +234,7 @@ public class GameScreen implements Screen {
         pauseButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.pressSound.play();
                 isPaused = true;
                 pauseDialog.show(stage);
             }
@@ -350,11 +359,13 @@ public class GameScreen implements Screen {
                 @Override
                 public void run() {
                     if (isAttacking) {
+                        game.punchSound.play();
                         int playerDamage = MathUtils.random(activeHero.getMinDamage(), activeHero.getMaxDamage());
                         int finalDamage = Math.max(0, playerDamage - enemy.getDefense());
                         enemy.takeDamage(finalDamage);
                         messageLabel.setText(activeHero.getName() + " attacks, dealing " + finalDamage + " damage!");
                     } else {
+                        game.defendSound.play();
                         isDefending = true;
                         messageLabel.setText(activeHero.getName() + " is defending!");
                     }
@@ -411,6 +422,7 @@ public class GameScreen implements Screen {
             Actions.run(new Runnable() {
                 @Override
                 public void run() {
+                    game.punchSound.play();
                     int enemyAttackPower = MathUtils.random(enemy.getMinDamage(), enemy.getMaxDamage());
                     int targetDefense = target.getDefense();
                     if (isDefending) {

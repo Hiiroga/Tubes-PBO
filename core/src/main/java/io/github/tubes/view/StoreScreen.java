@@ -1,4 +1,4 @@
-package io.github.tubes;
+package io.github.tubes.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -9,6 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import io.github.tubes.model.GameData;
+import io.github.tubes.controller.Main;
+import io.github.tubes.model.Item;
 
 public class StoreScreen implements Screen {
     private final Stage stage;
@@ -18,7 +21,7 @@ public class StoreScreen implements Screen {
     private final Main game;
 
     public StoreScreen(final Main game) {
-        this.game = game; // Inisialisasi variabel game
+        this.game = game;
         stage = new Stage(new FitViewport(Main.VIRTUAL_WIDTH, Main.VIRTUAL_HEIGHT));
         Gdx.input.setInputProcessor(stage);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
@@ -57,6 +60,7 @@ public class StoreScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (GameData.getGold() >= potion.cost) {
+                    game.buySound.play();
                     GameData.addGold(-potion.cost);
                     GameData.getInventory().addItem(potion.name, 1);
                     updateGold();
@@ -84,6 +88,7 @@ public class StoreScreen implements Screen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.backSound.play();
                 game.setScreen(new StageChoice(game));
             }
         });

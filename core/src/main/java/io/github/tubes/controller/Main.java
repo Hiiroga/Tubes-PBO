@@ -1,10 +1,12 @@
-package io.github.tubes;
+package io.github.tubes.controller;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import io.github.tubes.model.GameData;
+import io.github.tubes.view.HomeScreen;
 
 public class Main extends Game {
 
@@ -15,12 +17,15 @@ public class Main extends Game {
     public Music lobbyMusic;
     public Music battleMusic;
 
+    public Sound pressSound;
+    public Sound backSound;
+    public Sound potionEffectSound;
+    public Sound buySound;
+    public Sound punchSound;
+    public Sound defendSound;
+
     @Override
     public void create() {
-        atlas = new TextureAtlas("textures.atlas");
-        for (Texture texture : atlas.getTextures()) {
-            texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-        }
 
         lobbyMusic = Gdx.audio.newMusic(Gdx.files.internal("lobby.mp3"));
         lobbyMusic.setLooping(true);
@@ -28,10 +33,16 @@ public class Main extends Game {
 
         battleMusic = Gdx.audio.newMusic(Gdx.files.internal("battle.mp3"));
         battleMusic.setLooping(true);
-        battleMusic.setVolume(0.1f);
+        battleMusic.setVolume(0.2f);
+
+        pressSound = Gdx.audio.newSound(Gdx.files.internal("button.mp3"));
+        backSound = Gdx.audio.newSound(Gdx.files.internal("back.wav"));
+        potionEffectSound = Gdx.audio.newSound(Gdx.files.internal("potion_effect.wav"));
+        buySound = Gdx.audio.newSound(Gdx.files.internal("buy.wav"));
+        punchSound = Gdx.audio.newSound(Gdx.files.internal("sword.mp3"));
+        defendSound = Gdx.audio.newSound(Gdx.files.internal("defend.mp3"));
 
         GameData.load();
-
         this.setScreen(new HomeScreen(this));
     }
 
@@ -68,5 +79,12 @@ public class Main extends Game {
         }
         lobbyMusic.dispose();
         battleMusic.dispose();
+
+        pressSound.dispose();
+        backSound.dispose();
+        potionEffectSound.dispose();
+        buySound.dispose();
+        punchSound.dispose();
+        defendSound.dispose();
     }
 }

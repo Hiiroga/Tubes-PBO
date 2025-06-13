@@ -1,4 +1,4 @@
-package io.github.tubes;
+package io.github.tubes.model;
 
 public class Enemy extends Entity {
     private final int goldDrop;

@@ -1,4 +1,4 @@
-package io.github.tubes;
+package io.github.tubes.model;
 
 public class Item {
     public String name;
@@ -6,7 +6,6 @@ public class Item {
     public int cost;
     public int healAmount;
 
-    public Item() {}
 
     public Item(String name, String description, int cost, int healAmount) {
         this.name = name;

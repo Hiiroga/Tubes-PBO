@@ -1,4 +1,4 @@
-package io.github.tubes;
+package io.github.tubes.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import io.github.tubes.controller.Main;
 
 public class HomeScreen implements Screen {
     private final Main game;
@@ -40,6 +41,7 @@ public class HomeScreen implements Screen {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.pressSound.play();
                 game.setScreen(new MainMenuScreen(game));
             }
         });

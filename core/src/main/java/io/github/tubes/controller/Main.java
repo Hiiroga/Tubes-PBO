@@ -29,11 +29,11 @@ public class Main extends Game {
 
         lobbyMusic = Gdx.audio.newMusic(Gdx.files.internal("lobby.mp3"));
         lobbyMusic.setLooping(true);
-        lobbyMusic.setVolume(0.01f);
+        lobbyMusic.setVolume(0.5f);
 
         battleMusic = Gdx.audio.newMusic(Gdx.files.internal("battle.mp3"));
         battleMusic.setLooping(true);
-        battleMusic.setVolume(0.01f);
+        battleMusic.setVolume(0.5f);
 
         pressSound = Gdx.audio.newSound(Gdx.files.internal("button.mp3"));
         backSound = Gdx.audio.newSound(Gdx.files.internal("back.wav"));

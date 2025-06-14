@@ -60,7 +60,7 @@ public class StoreScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (GameData.getGold() >= potion.cost) {
-                    game.buySound.play(0.09f);
+                    game.buySound.play(0.9f);
                     GameData.addGold(-potion.cost);
                     GameData.getInventory().addItem(potion.name, 1);
                     updateGold();
@@ -88,7 +88,7 @@ public class StoreScreen implements Screen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.backSound.play(0.03f);
+                game.backSound.play(0.3f);
                 game.setScreen(new StageChoice(game));
             }
         });

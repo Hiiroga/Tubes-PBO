@@ -47,7 +47,7 @@ public class StageChoice implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 event.stop();
-                game.backSound.play(0.03f);
+                game.backSound.play(0.3f);
                 game.setScreen(new MainMenuScreen(game));
             }
         });
@@ -57,7 +57,7 @@ public class StageChoice implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 event.stop();
-                game.pressSound.play(0.04f);
+                game.pressSound.play(0.4f);
                 game.setScreen(new StoreScreen(game));
             }
         });
@@ -82,7 +82,7 @@ public class StageChoice implements Screen {
                 stageButton.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-                        game.pressSound.play(0.04f);
+                        game.pressSound.play(0.4f);
                         game.setScreen(new GameScreen(game, currentStage));
                     }
                 });

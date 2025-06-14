@@ -41,13 +41,12 @@ public class MainMenuScreen implements Screen {
         playButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent e, float x, float y) {
-                game.pressSound.play(0.04f);
+                game.pressSound.play(0.4f);
                 game.setScreen(new StageChoice(game));
             }
         });
 
         TextButton exitButton = new TextButton("EXIT", skin);
-        // Pemanggilan suara dipindahkan dari sini...
         exitButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent e, float x, float y) {
